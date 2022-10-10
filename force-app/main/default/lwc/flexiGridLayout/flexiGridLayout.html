@@ -1,0 +1,71 @@
+<template>
+    <template if:false={isAura}>
+        <template if:true={isWarningPreview}>
+            <p class="slds-notify slds-notify_alert slds-alert_warning">{warningMessage}</p>
+        </template>
+        <div class={gridClass} style={gridStyle}>
+            <div class={region1Class}>
+                <slot name="region1"></slot> 
+            </div>
+            <template if:true={shouldRender2}>
+                <div class={region2Class}>
+                    <slot name="region2"></slot> 
+                </div>
+            </template>
+            <template if:true={shouldRender3}>
+                <div class={region3Class}>
+                    <slot name="region3"></slot> 
+                </div>
+            </template>
+            <template if:true={shouldRender4}>
+                <div class={region4Class}>
+                    <slot name="region4"></slot> 
+                </div>
+            </template>
+            <template if:true={shouldRender5}>
+                <div class={region5Class}>
+                    <slot name="region5"></slot> 
+                </div>
+            </template>
+            <template if:true={shouldRender6}>
+                <div class={region6Class}>
+                    <slot name="region6"></slot> 
+                </div>
+            </template>
+            <template if:true={shouldRender7}>
+                <div class={region7Class}>
+                    <slot name="region7"></slot> 
+                </div>
+            </template>
+            <template if:true={shouldRender8}>
+                <div class={region8Class}>
+                    <slot name="region8"></slot> 
+                </div>
+            </template>
+            <template if:true={shouldRender9}>
+                <div class={region9Class}>
+                    <slot name="region9"></slot> 
+                </div>
+            </template>
+            <template if:true={shouldRender10}>
+                <div class={region10Class}>
+                    <slot name="region10"></slot> 
+                </div>
+            </template>
+            <template if:true={shouldRender11}>
+                <div class={region11Class}>
+                    <slot name="region11"></slot> 
+                </div>
+            </template>
+            <template if:true={shouldRender12}>
+                <div class={region12Class}>
+                    <slot name="region12"></slot> 
+                </div>
+            </template>
+        </div>
+    </template>
+    
+    <template if:true={isAura}>
+        <p class="slds-notify slds-notify_alert slds-alert_error">This component is not compatible with Aura runtime.</p>
+    </template>
+</template>
