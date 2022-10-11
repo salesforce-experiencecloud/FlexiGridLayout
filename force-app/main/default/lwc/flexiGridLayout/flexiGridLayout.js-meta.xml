@@ -18,10 +18,10 @@
             description="Select the number of regions to render." />
             <property name="regionSizing" label="Region Sizing (must be a number from 1-12, one per region, comma separated)" type="String" default="2,4,4,2" 
             description="A comma separated set of numbers (1-12) representing the size for each region. All numbers should add up to 12 for each row." />
-            <property name="verticalAlignment" type="String" label="Vertical Alignment" datasource="Top,Middle,Bottom" default="Middle" 
+            <property name="verticalAlignment" type="String" label="Vertical Alignment" datasource="Top,Centered,Bottom" default="Centered" 
             description="The default vertical alignment of content for all regions."/>
-            <property label="CSS Classes" name="classNames" type="String" default="slds-gutters_small slds-p-vertical_medium" 
-            description="Class names to uniquely target the component's styles." />
+            <property label="CSS Classes" name="classNames" type="String" default="" 
+            description="Class names to uniquely target the component's styles or add SLDS class names to component (refer to component documentation for more info)." />
         </targetConfig>
     </targetConfigs>
 </LightningComponentBundle>

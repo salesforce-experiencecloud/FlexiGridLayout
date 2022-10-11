@@ -1,18 +1,8 @@
-# Salesforce DX Project: Next Steps
+# Flexi-Grid Layout for Experience Cloud (LWR)
+![Flexi-Grid Layout Image ](https://user-images.githubusercontent.com/8514282/195182675-74872a86-379a-4610-8ec4-6872a75ce9aa.png)
 
-Now that you’ve created a Salesforce DX project, what’s next? Here are some documentation resources to get you started.
+## Description:
 
-## How Do You Plan to Deploy Your Changes?
+The Flexi-Grid Layout component for Experience Cloud LWR brings you the ability to create amazing modern designs by allowing you to render and control up to 12 regions of content, and drag/drop any component from your panel in builder into them. Configure the number of regions you want on a row, their sizes per the 12-column SLDS grid system, and stacking behavior on different form factors. Take your design to the next level with the ability to pass custom CSS classes and fully control the look and feel of your content regions!
 
-Do you want to deploy a set of changes, or create a self-contained application? Choose a [development model](https://developer.salesforce.com/tools/vscode/en/user-guide/development-models).
-
-## Configure Your Salesforce DX Project
-
-The `sfdx-project.json` file contains useful configuration information for your project. See [Salesforce DX Project Configuration](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_ws_config.htm) in the _Salesforce DX Developer Guide_ for details about this file.
-
-## Read All About It
-
-- [Salesforce Extensions Documentation](https://developer.salesforce.com/tools/vscode/)
-- [Salesforce CLI Setup Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/sfdx_setup_intro.htm)
-- [Salesforce DX Developer Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_intro.htm)
-- [Salesforce CLI Command Reference](https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/cli_reference.htm)
+[Click here for More Info / Documentation](https://salesforce.quip.com/dywfAQOIYaaj)
