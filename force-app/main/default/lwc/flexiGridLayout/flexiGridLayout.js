@@ -99,21 +99,19 @@ export default class FlexiGridLayout extends LightningElement {
 
     get gridClass() {
         let gridClass = 'slds-grid slds-wrap';
+
+        let alignClass = 'slds-grid_vertical-align-center';
+        if (this.verticalAlignment === 'Top') {
+            alignClass = 'slds-grid_vertical-align-start';
+        } else if (this.verticalAlignment === 'Bottom') {
+            alignClass = 'slds-grid_vertical-align-end';
+        }
+        gridClass += ' ' + alignClass;
+
         if (this.classNames) {
             gridClass += ' ' + this.classNames;
         }
         return gridClass;
-    }
-
-    get gridStyle() {
-        let alignValue = 'center';
-        if (this.verticalAlignment === 'Top') {
-            alignValue = 'start';
-        } else if (this.verticalAlignment === 'Bottom') {
-            alignValue = 'end';
-        }
-        
-        return 'align-items: ' + alignValue;
     }
 
     isInSitePreview() {
@@ -128,7 +126,7 @@ export default class FlexiGridLayout extends LightningElement {
 
     getRegionClass(index) {
         //stackRegions:datasource:Never,On Mobile,On Mobile and Tablet,Always
-        let regionClass = 'slds-col region region-' + index + 1;
+        let regionClass = 'slds-col region region-' + (index + 1);
         let regionSize = this.regionSizingArray.length > index ? this.regionSizingArray[index].trim() : this.regionSizeFallback;
         if (this.stackRegions === 'Never') {
             regionClass += ' slds-size_' + regionSize + '-of-12';
