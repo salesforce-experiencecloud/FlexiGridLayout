@@ -1,0 +1,26 @@
+.fit-content {
+    width: max-content;
+    flex: none;
+}
+
+.align-horizontal-right {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+}
+
+.align-horizontal-left {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+.align-horizontal-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.available-space {
+    flex: auto;
+}

@@ -4,5 +4,5 @@
         <members>*</members>
         <name>LightningComponentBundle</name>
     </types>
-    <version>55.0</version>
+    <version>57.0</version>
 </Package>

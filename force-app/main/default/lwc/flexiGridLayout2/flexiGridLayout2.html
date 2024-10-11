@@ -1,0 +1,70 @@
+<template>
+    
+    <template if:false={isAura}>
+        <template if:true={isWarningPreview}>
+            <p class="slds-notify slds-notify_alert slds-alert_warning">{warningMessage}</p>
+        </template>
+        <div class={gridClass}>
+            
+            <template lwc:if={slotsReady}>
+                <template for:each={regionList} for:item="region" for:index="index">
+                    <template lwc:if={region.showRegion}>
+                        <div key={region.name} class={region.classNames}>
+
+                            <template lwc:if={showRegionNames}>
+                                <div class="slds-notify slds-notify_alert slds-alert_offline slds-text-body_small slds-text-color_inverse" role="alert">
+                                    {region.name}
+                                </div>
+                            </template>
+                            
+                            <template lwc:if={region.isSaaSy}>
+                                <slot name="SaaSy"></slot> 
+                            </template>
+                            <template lwc:elseif={region.isAstro}>
+                                <slot name="Astro"></slot> 
+                            </template>
+                            <template lwc:elseif={region.isEinstein}>
+                                <slot name="Einstein"></slot> 
+                            </template>
+                            <template lwc:elseif={region.isCodey}>
+                                <slot name="Codey"></slot> 
+                            </template>
+                            <template lwc:elseif={region.isCloudy}>
+                                <slot name="Cloudy"></slot> 
+                            </template>
+                            <template lwc:elseif={region.isBrandy}>
+                                <slot name="Brandy"></slot> 
+                            </template>
+                            <template lwc:elseif={region.isRuth}>
+                                <slot name="Ruth"></slot> 
+                            </template>
+                            <template lwc:elseif={region.isZig}>
+                                <slot name="Zig"></slot> 
+                            </template>
+                            <template lwc:elseif={region.isKoa}>
+                                <slot name="Koa"></slot> 
+                            </template>
+                            <template lwc:elseif={region.isFlo}>
+                                <slot name="Flo"></slot> 
+                            </template>
+                            <template lwc:elseif={region.isAppy}>
+                                <slot name="Appy"></slot> 
+                            </template>
+                            <template lwc:elseif={region.isMax}>
+                                <slot name="Max"></slot> 
+                            </template>
+
+                        
+
+                        </div>
+                    </template>
+                </template>
+            </template>
+
+        </div>
+    </template>
+    
+    <template if:true={isAura}>
+        <p class="slds-notify slds-notify_alert slds-alert_error">This component is not compatible with Aura runtime.</p>
+    </template>
+</template>

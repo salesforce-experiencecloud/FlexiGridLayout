@@ -1,0 +1,489 @@
+<template>
+    
+    <div class="slds-m-bottom_medium">
+        <a href="https://flexigridlayoutforexpcloud.substack.com/p/documentation" 
+            target="_blank"
+            class="slds-button slds-button_outline-brand docLink"
+            >
+            Documentation
+            <lightning-icon class="slds-m-left_small docIcon" icon-name="utility:new_window" size="xx-small" alternative-text="Open Documentation in New Window" title="Open Documentation in New Window"></lightning-icon>
+            
+        </a>
+    </div>
+    <lightning-tabset>
+        <lightning-tab label="General">
+
+            <lightning-input 
+                type={propInputs.hideRegionNamesInBuilder.type} 
+                label={propInputs.hideRegionNamesInBuilder.label} 
+                class={propInputs.hideRegionNamesInBuilder.classes} 
+                checked={propInputs.hideRegionNamesInBuilder.value}
+                onchange={propInputs.hideRegionNamesInBuilder.changeHandler} 
+                data-key={propInputs.hideRegionNamesInBuilder.key}
+                field-level-help={propInputs.hideRegionNamesInBuilder.help} 
+                required={propInputs.hideRegionNamesInBuilder.required}
+                >
+            </lightning-input>
+            <span class="slds-text-body_small">*Region names are only visible in builder / preview.</span>
+
+            <div class={propInputs.formFactorConfig.classes}>
+                <lightning-select
+                    name={propInputs.formFactorConfig.key}
+                    label={propInputs.formFactorConfig.label} 
+                    value={propInputs.formFactorConfig.value}
+                    options={propInputs.formFactorConfig.options}
+                    onchange={propInputs.formFactorConfig.changeHandler}
+                    required={propInputs.formFactorConfig.required}
+                    data-key={propInputs.formFactorConfig.key}
+                    field-level-help={propInputs.formFactorConfig.help} 
+                    ></lightning-select>
+                <span class="slds-text-body_small">
+                    *Switch view mode in builder to configure the regions for that view mode, 
+                    or change "Builder View Mode" to "All" to see the tabs for all view modes.
+                </span>
+            </div>
+
+            <lightning-tabset>
+
+                <template lwc:if={showDesktopTab}>
+                    <lightning-tab label="Desktop" value="Desktop" onactive={handleActiveTab} class="slds-p-horizontal_medium">
+                        <p>Configuration for Desktop form factor.</p>
+
+                        <lightning-tabset>
+
+                            <lightning-tab label="Regions">
+
+                                <div class="slds-grid slds-wrap slds-m-bottom_large">
+                                    
+                                    <template for:each={propInputs.desktopConfig.value.regionList} for:item="region" for:index="index">
+                                        <div key={region.name} class="slds-size_2-of-12 slds-p-around_medium slds-align_absolute-center">
+                                            <template lwc:if={region.showRegion}>
+                                                <lightning-icon
+                                                    icon-name="utility:preview"
+                                                    size="x-small"
+                                                    variant="success"
+                                                    title="Region visible"
+                                                    alternative-text="Region visible"
+                                                >
+                                                </lightning-icon>
+                                            </template>
+                                            <template lwc:else>
+                                                <lightning-icon
+                                                    icon-name="utility:hide"
+                                                    size="x-small"
+                                                    title="Region hidden"
+                                                    alternative-text="Region hidden"
+                                                >
+                                                </lightning-icon>
+                                            </template>
+                                            <span class="slds-m-left_x-small">{region.name}</span>
+                                        </div>
+                                        <div key={region.name} class="slds-size_4-of-12 slds-p-around_medium slds-align_absolute-center">
+                                            <lightning-select
+                                                name={region.name}
+                                                data-id={region.name}
+                                                data-type="size"
+                                                label="Size"
+                                                value={region.size}
+                                                options={sizeOptions}
+                                                onchange={handleSizeChange}
+                                                class=""
+                                                data-key={region.name}
+                                                field-level-help="Select the size of the region based on a 12 column layout. 
+                                                            Select Fit Content if you want the region to be the size of the content within it. 
+                                                            Select Available Space if you want the region to be the size of available space between the regions before and after it. 
+                                                            Pro Tips: if you want a region to wrap, set the size to 12. if you want to hide a region, set the size to 0. "
+                                                ></lightning-select>
+                                                <span class="slds-align-bottom slds-m-left_x-small slds-m-bottom_x-small span12"> / 12</span>
+                                        </div>
+                                        <div key={region.name} class="slds-size_4-of-12 slds-p-around_medium slds-align_absolute-center">
+                                            <lightning-select
+                                                name={region.name}
+                                                data-id={region.name}
+                                                data-index={index}
+                                                data-type="horizontalAlignment"
+                                                label="Horizontal Alignment"
+                                                value={region.horizontalAlignment}
+                                                options={horizontalAlignmentOptions}
+                                                onchange={handleHorizontalAlignmentChange}
+                                                class=""
+                                                data-key={region.name}
+                                                field-level-help="Select the horizontal alignment of the region's content."
+                                                ></lightning-select>
+                                                
+                                        </div>
+                                        <div key={region.name} class="slds-size_2-of-12 slds-p-around_medium slds-align_absolute-center">
+                                            <lightning-select
+                                                name={region.name}
+                                                data-id={region.name}
+                                                data-index={index}
+                                                data-type="order"
+                                                label="Order"
+                                                value={region.order}
+                                                options={orderOptions}
+                                                onchange={handleOrderChange}
+                                                class=""
+                                                data-key={region.name}
+                                                field-level-help="Select the order of the region from left to right."
+                                                ></lightning-select>
+                                                
+                                        </div>
+                                        
+                                    </template>
+                                </div>
+                                </lightning-tab>
+
+                                <lightning-tab label="Styles" class="slds-p-horizontal_medium">
+
+                                    <div class={propInputs.verticalAlignment.classes}>
+                                        <lightning-select
+                                            name={propInputs.verticalAlignment.key}
+                                            label={propInputs.verticalAlignment.label} 
+                                            value={propInputs.desktopConfig.value.styles.verticalAlignment}
+                                            options={propInputs.verticalAlignment.options}
+                                            onchange={propInputs.verticalAlignment.changeHandler}
+                                            required={propInputs.verticalAlignment.required}
+                                            data-key={propInputs.verticalAlignment.key}
+                                            field-level-help={propInputs.verticalAlignment.help} 
+                                            ></lightning-select>
+                                    </div>
+
+                                    <lightning-input 
+                                        type={propInputs.classNames.type} 
+                                        label={propInputs.classNames.label} 
+                                        class={propInputs.classNames.classes} 
+                                        value={propInputs.desktopConfig.value.styles.classNames}
+                                        onchange={propInputs.classNames.changeHandler} 
+                                        data-key={propInputs.classNames.key}
+                                        field-level-help={propInputs.classNames.help} 
+                                        required={propInputs.classNames.required}
+                                        >
+                                    </lightning-input>
+                                </lightning-tab>
+
+                                <lightning-tab label="Copy From" class="slds-p-horizontal_medium">
+                                    <div class="slds-text-color_destructive slds-m-bottom_small slds-text-align_center">Warning: This action will replace your configuration for the current form factor with those of the chosen form factor below.</div>
+                                    <div class="slds-align_absolute-center">
+                                        <button class="slds-button slds-button_brand slds-m-around_medium" data-source="tablet" onclick={handleCopy}>Tablet</button>
+                                        <button class="slds-button slds-button_brand slds-m-around_medium" data-source="mobile" onclick={handleCopy}>Mobile</button>
+                                    </div>
+                                </lightning-tab>
+                        </lightning-tabset>
+                    </lightning-tab>
+                </template>
+
+                <template lwc:if={showTabletTab}>
+                    <lightning-tab label="Tablet" value="Tablet" onactive={handleActiveTab} class="slds-p-horizontal_medium">
+                        <p>Configuration for Tablet form factor.</p>
+
+                        <lightning-tabset>
+
+                            <lightning-tab label="Regions">
+
+                                <div class="slds-grid slds-wrap slds-m-bottom_large">
+                                    
+                                    <template for:each={propInputs.tabletConfig.value.regionList} for:item="region" for:index="index">
+                                        <div key={region.name} class="slds-size_3-of-12 slds-p-around_medium slds-align_absolute-center">
+                                            <template lwc:if={region.showRegion}>
+                                                <lightning-icon
+                                                    icon-name="utility:preview"
+                                                    size="x-small"
+                                                    variant="success"
+                                                    title="Region visible"
+                                                    alternative-text="Region visible"
+                                                >
+                                                </lightning-icon>
+                                            </template>
+                                            <template lwc:else>
+                                                <lightning-icon
+                                                    icon-name="utility:hide"
+                                                    size="x-small"
+                                                    title="Region hidden"
+                                                    alternative-text="Region hidden"
+                                                >
+                                                </lightning-icon>
+                                            </template>
+                                            <span class="slds-m-left_x-small">{region.name}</span>
+                                        </div>
+                                        <div key={region.name} class="slds-size_3-of-12 slds-p-around_medium slds-align_absolute-center">
+                                            <lightning-select
+                                                name={region.name}
+                                                data-id={region.name}
+                                                data-type="size"
+                                                label="Size"
+                                                value={region.size}
+                                                options={sizeOptions}
+                                                onchange={handleSizeChange}
+                                                class=""
+                                                data-key={region.name}
+                                                field-level-help="Select the size of the region based on a 12 column layout. Pro Tips: if you want a region to wrap, set the size to 12. if you want to hide a region, set the size to 0."
+                                                ></lightning-select>
+                                                <span class="slds-align-bottom slds-m-left_x-small slds-m-bottom_x-small span12"> / 12</span>
+                                        </div>
+                                        <div key={region.name} class="slds-size_4-of-12 slds-p-around_medium slds-align_absolute-center">
+                                            <lightning-select
+                                                name={region.name}
+                                                data-id={region.name}
+                                                data-index={index}
+                                                data-type="horizontalAlignment"
+                                                label="Horizontal Alignment"
+                                                value={region.horizontalAlignment}
+                                                options={horizontalAlignmentOptions}
+                                                onchange={handleHorizontalAlignmentChange}
+                                                class=""
+                                                data-key={region.name}
+                                                field-level-help="Select the horizontal alignment of the region's content."
+                                                ></lightning-select>
+                                                
+                                        </div>
+                                        <div key={region.name} class="slds-size_2-of-12 slds-p-around_medium slds-align_absolute-center">
+                                            <lightning-select
+                                                name={region.name}
+                                                data-id={region.name}
+                                                data-index={index}
+                                                data-type="order"
+                                                label="Order"
+                                                value={region.order}
+                                                options={orderOptions}
+                                                onchange={handleOrderChange}
+                                                class=""
+                                                data-key={region.name}
+                                                field-level-help="Select the order of the region from left to right."
+                                                ></lightning-select>
+                                                
+                                        </div>
+                                        
+                                    </template>
+                                </div>
+                                </lightning-tab>
+
+                                <lightning-tab label="Styles" class="slds-p-horizontal_medium">
+
+                                    <div class={propInputs.verticalAlignment.classes}>
+                                        <lightning-select
+                                            name={propInputs.verticalAlignment.key}
+                                            label={propInputs.verticalAlignment.label} 
+                                            value={propInputs.tabletConfig.value.styles.verticalAlignment}
+                                            options={propInputs.verticalAlignment.options}
+                                            onchange={propInputs.verticalAlignment.changeHandler}
+                                            required={propInputs.verticalAlignment.required}
+                                            data-key={propInputs.verticalAlignment.key}
+                                            field-level-help={propInputs.verticalAlignment.help} 
+                                            ></lightning-select>
+                                    </div>
+
+                                    <lightning-input 
+                                        type={propInputs.classNames.type} 
+                                        label={propInputs.classNames.label} 
+                                        class={propInputs.classNames.classes} 
+                                        value={propInputs.tabletConfig.value.styles.classNames}
+                                        onchange={propInputs.classNames.changeHandler} 
+                                        data-key={propInputs.classNames.key}
+                                        field-level-help={propInputs.classNames.help} 
+                                        required={propInputs.classNames.required}
+                                        >
+                                    </lightning-input>
+                                </lightning-tab>
+
+                                <lightning-tab label="Copy From" class="slds-p-horizontal_medium">
+                                    <div class="slds-text-color_destructive slds-m-bottom_small slds-text-align_center">Warning: This action will replace your configuration for the current form factor with those of the chosen form factor below.</div>
+                                    <div class="slds-align_absolute-center">
+                                        <button class="slds-button slds-button_brand slds-m-around_medium" data-source="desktop" onclick={handleCopy}>Desktop</button>
+                                        <button class="slds-button slds-button_brand slds-m-around_medium" data-source="mobile" onclick={handleCopy}>Mobile</button>
+                                    </div>
+                                </lightning-tab>
+                        </lightning-tabset>
+
+                    </lightning-tab>
+                </template>
+
+                <template lwc:if={showMobileTab}>
+                    <lightning-tab label="Mobile" value="Mobile" onactive={handleActiveTab} class="slds-p-horizontal_medium">
+                        <p>Configuration for Mobile form factor.</p>
+
+                        <lightning-tabset>
+
+                            <lightning-tab label="Regions">
+
+                                <div class="slds-grid slds-wrap slds-m-bottom_large">
+                                    
+                                    <template for:each={propInputs.mobileConfig.value.regionList} for:item="region" for:index="index">
+                                        <div key={region.name} class="slds-size_3-of-12 slds-p-around_medium slds-align_absolute-center">
+                                            <template lwc:if={region.showRegion}>
+                                                <lightning-icon
+                                                    icon-name="utility:preview"
+                                                    size="x-small"
+                                                    variant="success"
+                                                    title="Region visible"
+                                                    alternative-text="Region visible"
+                                                >
+                                                </lightning-icon>
+                                            </template>
+                                            <template lwc:else>
+                                                <lightning-icon
+                                                    icon-name="utility:hide"
+                                                    size="x-small"
+                                                    title="Region hidden"
+                                                    alternative-text="Region hidden"
+                                                >
+                                                </lightning-icon>
+                                            </template>
+                                            <span class="slds-m-left_x-small">{region.name}</span>
+                                        </div>
+                                        <div key={region.name} class="slds-size_3-of-12 slds-p-around_medium slds-align_absolute-center">
+                                            <lightning-select
+                                                name={region.name}
+                                                data-id={region.name}
+                                                data-type="size"
+                                                label="Size"
+                                                value={region.size}
+                                                options={sizeOptions}
+                                                onchange={handleSizeChange}
+                                                class=""
+                                                data-key={region.name}
+                                                field-level-help="Select the size of the region based on a 12 column layout. Pro Tips: if you want a region to wrap, set the size to 12. if you want to hide a region, set the size to 0."
+                                                ></lightning-select>
+                                                <span class="slds-align-bottom slds-m-left_x-small slds-m-bottom_x-small span12"> / 12</span>
+                                        </div>
+
+                                        <div key={region.name} class="slds-size_4-of-12 slds-p-around_medium slds-align_absolute-center">
+                                            <lightning-select
+                                                name={region.name}
+                                                data-id={region.name}
+                                                data-index={index}
+                                                data-type="horizontalAlignment"
+                                                label="Horizontal Alignment"
+                                                value={region.horizontalAlignment}
+                                                options={horizontalAlignmentOptions}
+                                                onchange={handleHorizontalAlignmentChange}
+                                                class=""
+                                                data-key={region.name}
+                                                field-level-help="Select the horizontal alignment of the region's content."
+                                                ></lightning-select>
+                                                
+                                        </div>
+
+                                        <div key={region.name} class="slds-size_2-of-12 slds-p-around_medium slds-align_absolute-center">
+                                            <lightning-select
+                                                name={region.name}
+                                                data-id={region.name}
+                                                data-index={index}
+                                                data-type="order"
+                                                label="Order"
+                                                value={region.order}
+                                                options={orderOptions}
+                                                onchange={handleOrderChange}
+                                                class=""
+                                                data-key={region.name}
+                                                field-level-help="Select the order of the region from left to right."
+                                                ></lightning-select>
+                                                
+                                        </div>
+                                        
+                                    </template>
+                                </div>
+                                </lightning-tab>
+
+                                <lightning-tab label="Styles" class="slds-p-horizontal_medium">
+
+                                    <div class={propInputs.verticalAlignment.classes}>
+                                        <lightning-select
+                                            name={propInputs.verticalAlignment.key}
+                                            label={propInputs.verticalAlignment.label} 
+                                            value={propInputs.mobileConfig.value.styles.verticalAlignment}
+                                            options={propInputs.verticalAlignment.options}
+                                            onchange={propInputs.verticalAlignment.changeHandler}
+                                            required={propInputs.verticalAlignment.required}
+                                            data-key={propInputs.verticalAlignment.key}
+                                            field-level-help={propInputs.verticalAlignment.help} 
+                                            ></lightning-select>
+                                    </div>
+
+                                    <lightning-input 
+                                        type={propInputs.classNames.type} 
+                                        label={propInputs.classNames.label} 
+                                        class={propInputs.classNames.classes} 
+                                        value={propInputs.mobileConfig.value.styles.classNames}
+                                        onchange={propInputs.classNames.changeHandler} 
+                                        data-key={propInputs.classNames.key}
+                                        field-level-help={propInputs.classNames.help} 
+                                        required={propInputs.classNames.required}
+                                        >
+                                    </lightning-input>
+                                </lightning-tab>
+
+                                <lightning-tab label="Copy From" class="slds-p-horizontal_medium">
+                                    <div class="slds-text-color_destructive slds-m-bottom_small slds-text-align_center">Warning: This action will replace your configuration for the current form factor with those of the chosen form factor below.</div>
+                                    <div class="slds-align_absolute-center">
+                                        <button class="slds-button slds-button_brand slds-m-around_medium" data-source="desktop" onclick={handleCopy}>Desktop</button>
+                                        <button class="slds-button slds-button_brand slds-m-around_medium" data-source="tablet" onclick={handleCopy}>Tablet</button>
+                                    </div>
+                                </lightning-tab>
+                        </lightning-tabset>
+
+                    </lightning-tab>
+                </template>
+
+            </lightning-tabset>
+
+
+        </lightning-tab>
+
+        <lightning-tab label="Advanced">
+            <div class="slds-text-color_default slds-m-bottom_small slds-text-align_center">Use this section to export the entire configuration so that it could be imported into another instance of the component - that can be on the same or a different site or org.</div>
+            
+            <template lwc:if={exportError}>
+                <div class="slds-text-color_destructive slds-m-bottom_small slds-text-align_center">{exportError}</div>
+            </template> 
+            <div class="slds-align_absolute-center">
+                <button class="slds-button slds-button_brand slds-m-around_medium" onclick={handleExportConfig}>Export Config</button>
+                <button class="slds-button slds-button_brand slds-m-around_medium" onclick={openImportModal}>Import Config</button>
+            </div>
+        </lightning-tab>
+    </lightning-tabset>
+
+
+    <template if:true={importModalOpen}>
+
+        <div class="demo-only" style="height: 640px;">
+            <section role="dialog" tabindex="-1" class={modalClass} aria-modal="true">
+                <div class="slds-modal__container">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" onclick={closeImportModal}>
+                        <lightning-icon
+                            icon-name="utility:close"
+                            size="small"
+                            alternative-text="Indicates close"
+                        >
+                        </lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <header class="slds-modal__header">
+                        Load Component Configuration
+                    </header>
+                    <div class="slds-modal__content slds-p-around_medium">
+                        
+                        <div class="slds-m-vertical_large slds-align_absolute-center slds-text-color_destructive">
+                            Caution: This action will overwrite the current values of your component properties, can potentially cause corruption, and is not reversible. 
+                        </div>
+
+                        <div class="slds-m-vertical_large slds-align_absolute-center">
+                            <label class="slds-form-element__label" for="fileImport">Select Properties Config File (.json)</label> <br/>
+                            <input id="fileImport" type="file" data-name="importConfigFile" accept=".json"/>
+                        </div>
+
+                        <template lwc:if={importError}>
+                            <div class="slds-text-color_error slds-text-body_small">{importError}</div>
+                        </template>
+                        
+                    </div>
+                    <footer class="slds-modal__footer">
+                        <button class="slds-button slds-button_destructive" onclick={handleImportConfig}>Load</button>
+                        <button class="slds-button slds-button_brand" onclick={closeImportModal}>Cancel</button>
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </div>
+    </template>
+
+</template>
